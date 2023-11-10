@@ -33,7 +33,7 @@ extension Entry {
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try Utils.parseDate(updatedNode.content)
+        let updated = try parseDate(updatedNode.content)
         
         
         let authors = try xmlNode.childNodes(name: "author")
@@ -50,7 +50,7 @@ extension Entry {
         let contributors = try xmlNode.childNodes(name: "contributor")
             .map(Person.init(xmlNode:))
         let published = try xmlNode.childNode(name: "published")
-            .map({ try Utils.parseDate($0.content) })
+            .map({ try parseDate($0.content) })
         let rights = try xmlNode.childNode(name: "rights")
             .map(Text.init(xmlNode:))
         let source = try xmlNode.childNode(name: "source")

@@ -22,7 +22,7 @@ extension Source {
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try Utils.parseDate(updatedNode.content)
+        let updated = try parseDate(updatedNode.content)
         
         self.init(
             uri: uri,

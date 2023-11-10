@@ -34,7 +34,7 @@ extension Feed {
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try Utils.parseDate(updatedNode.content)
+        let updated = try parseDate(updatedNode.content)
         
         let entries = try xmlNode.childNodes(name: "entry")
             .map(Entry.init(xmlNode:))
