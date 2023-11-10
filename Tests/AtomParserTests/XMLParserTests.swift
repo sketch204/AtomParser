@@ -1,10 +1,3 @@
-//
-//  XMLParserTests.swift
-//  
-//
-//  Created by Inal Gotov on 2023-11-10.
-//
-
 import XCTest
 @testable import AtomParser
 
