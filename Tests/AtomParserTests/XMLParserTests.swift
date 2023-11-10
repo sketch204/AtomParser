@@ -6,30 +6,243 @@
 //
 
 import XCTest
+@testable import AtomParser
 
-final class XMLParserTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+ class XMLParserTests: XCTestCase {
+    func test_parsesSelfClosingNode() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root/>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(name: "root")
+        
+        XCTAssertEqual(node, expectedNode)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_parsesSelfClosingNode_withAttributes() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root attr1="value1" attr2="value2"/>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            attributes: [
+                "attr1": "value1",
+                "attr2": "value2",
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_parsesNode() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root></root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(name: "root")
+        
+        XCTAssertEqual(node, expectedNode)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_parsesNode_trimsNewLine_whenNodeNotOnSameLine() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>
+        </root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(name: "root")
+        
+        XCTAssertEqual(node, expectedNode)
     }
+    
+    func test_parsesNode_withAttributes() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root attr1="value1" attr2="value2"></root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            attributes: [
+                "attr1": "value1",
+                "attr2": "value2",
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesNode_withContent() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>This is content</root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            content: "This is content"
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesNode_withContentAndAttributes() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root attr1="value1" attr2="value2">This is content</root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            attributes: [
+                "attr1": "value1",
+                "attr2": "value2",
+            ],
+            content: "This is content"
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesChildren_oneLevelDeep() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>
+            <child></child>
+            <child />
+        </root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            children: [
+                AtomXMLNode(name: "child"),
+                AtomXMLNode(name: "child"),
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesChildren_withAttributes_oneLevelDeep() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>
+            <child attr1="value1"></child>
+            <child attr2="value2"/>
+        </root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            children: [
+                AtomXMLNode(
+                    name: "child",
+                    attributes: [
+                        "attr1": "value1",
+                    ]
+                ),
+                AtomXMLNode(
+                    name: "child",
+                    attributes: [
+                        "attr2": "value2",
+                    ]
+                ),
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesChildren_withContent_oneLevelDeep() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>
+            <child>This is content</child>
+            <child />
+        </root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            children: [
+                AtomXMLNode(name: "child", content: "This is content"),
+                AtomXMLNode(name: "child"),
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+    
+    func test_parsesChildren_withContentAndAttributes_oneLevelDeep() throws {
+        let xml = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <root>
+            <child>This is content</child>
+            <child attr="value"/>
+        </root>
+        """
+        
+        let parser = try AtomXMLParser(string: xml)
+        let node = try parser.parse()
+        
+        let expectedNode = AtomXMLNode(
+            name: "root",
+            children: [
+                AtomXMLNode(name: "child", content: "This is content"),
+                AtomXMLNode(
+                    name: "child",
+                    attributes: [
+                        "attr": "value",
+                    ]
+                ),
+            ]
+        )
+        
+        XCTAssertEqual(node, expectedNode)
+    }
+}
 
+extension AtomXMLNode: Equatable {
+    public static func ==(_ lhs: Self, _ rhs: Self) -> Bool {
+        lhs.name == rhs.name
+        && lhs.attributes == rhs.attributes
+        && lhs.content == rhs.content
+        && lhs.content == rhs.content
+    }
 }
