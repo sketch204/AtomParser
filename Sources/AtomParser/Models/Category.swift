@@ -7,7 +7,7 @@ public struct Category {
 }
 
 extension Category {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "category" else {
             throw ParsingError.invalidNode
         }

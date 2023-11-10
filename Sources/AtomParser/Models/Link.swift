@@ -9,7 +9,7 @@ public struct Link {
 }
 
 extension Link {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "link" else { throw ParsingError.invalidNode }
         
         guard let url = xmlNode.attributes["href"].flatMap(URL.init(string:)) else {

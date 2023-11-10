@@ -7,7 +7,7 @@ public struct Generator {
 }
 
 extension Generator {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "generator" else {
             throw ParsingError.invalidNode
         }

@@ -18,7 +18,7 @@ public struct Entry {
 }
 
 extension Entry {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "entry" else {
             throw ParsingError.invalidNode
         }

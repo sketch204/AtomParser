@@ -7,7 +7,7 @@ public struct Person {
 }
 
 extension Person {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard ["author", "contributor"].contains(xmlNode.name) else {
             throw ParsingError.invalidNode
         }

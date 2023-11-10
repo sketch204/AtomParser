@@ -5,7 +5,7 @@ public struct Image {
 }
 
 extension Image {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard ["icon", "logo"].contains(xmlNode.name) else {
             throw ParsingError.invalidNode
         }

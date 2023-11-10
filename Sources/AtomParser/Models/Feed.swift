@@ -21,7 +21,7 @@ public struct Feed {
 
 
 extension Feed {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "feed" else { throw ParsingError.invalidNode }
         
         guard let idNode = xmlNode.childNode(name: "id"),

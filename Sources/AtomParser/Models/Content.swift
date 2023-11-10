@@ -7,7 +7,7 @@ public enum Content {
 }
 
 extension Content {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "content" else {
             throw ParsingError.invalidNode
         }

@@ -7,7 +7,7 @@ public struct Source {
 }
 
 extension Source {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard xmlNode.name == "source" else {
             throw ParsingError.invalidNode
         }

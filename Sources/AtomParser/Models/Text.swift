@@ -18,7 +18,7 @@ public struct Text {
 }
 
 extension Text {
-    init(xmlNode: XMLNode) throws {
+    init(xmlNode: AtomXMLNode) throws {
         guard ["title", "summary", "subtitle", "content", "rights"].contains(xmlNode.name) else {
             throw ParsingError.invalidNode
         }
