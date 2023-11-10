@@ -71,7 +71,7 @@ extension AtomXMLParser: XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        assert(elementName == topStackNode?.name)
+        assert(elementName.lowercased() == topStackNode?.name)
         
         assignAccumulatedStringToTopNode()
         popTopNode()
@@ -92,7 +92,7 @@ extension AtomXMLParser: XMLParserDelegate {
     
     private func startNewNode(name: String, attributes: [String: String]) {
         resetAccumulatedContent()
-        let newNode = AtomXMLNode(name: name, attributes: attributes)
+        let newNode = AtomXMLNode(name: name.lowercased(), attributes: attributes)
         stack.append(newNode)
     }
     
