@@ -8,6 +8,7 @@ private func createDateFormatter(_ formatString: String) -> DateFormatter {
 
 
 private let formatters = [
+    // https://www.w3.org/Protocols/rfc822/#z28
     createDateFormatter("EEE, d MMM yyyy HH:mm:ss zzz"),
     createDateFormatter("EEE, d MMM yyyy HH:mm zzz"),
     createDateFormatter("EEE, d MMM yyyy HH:mm:ss"),
