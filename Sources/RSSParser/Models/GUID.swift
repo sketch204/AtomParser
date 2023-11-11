@@ -1,11 +1,11 @@
 import Foundation
 import AtomXML
 
-struct GUID {
-    let contents: String
-    let isPermaLink: Bool
+public struct GUID {
+    public let contents: String
+    public let isPermaLink: Bool
     
-    var url: URL? {
+    public var url: URL? {
         URL(string: contents)
     }
 }

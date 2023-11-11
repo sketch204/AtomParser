@@ -1,8 +1,8 @@
 import AtomXML
 
-struct Category {
-    let name: String
-    let domain: String?
+public struct Category {
+    public let name: String
+    public let domain: String?
 }
 
 extension Category {

@@ -1,20 +1,20 @@
 import Foundation
 import AtomXML
 
-struct Image {
+public struct Image {
     /// The image's link element identifies the URL of the web site represented by the image. This SHOULD be the same URL as the channel's link element.
-    let link: URL
+    public let link: URL
     /// The image's title element holds character data that provides a human-readable description of the image
-    let title: String
+    public let title: String
     /// The image's url element identifies the URL of the image, which MUST be in the GIF, JPEG or PNG formats
-    let url: URL
+    public let url: URL
     
     /// The image's description element holds character data that provides a human-readable characterization of the site linked to the image
-    let description: String?
+    public let description: String?
     /// The image's width element contains the width, in pixels, of the image. The image MUST be no wider than 144 pixels. If this element is omitted, the image is assumed to be 88 pixels wide.
-    let width: Int?
+    public let width: Int?
     /// The image's height element contains the height, in pixels, of the image. The image MUST be no taller than 400 pixels. If this element is omitted, the image is assumed to be 31 pixels tall.
-    let height: Int?
+    public let height: Int?
 }
 
 extension Image {

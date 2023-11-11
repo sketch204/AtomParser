@@ -1,40 +1,40 @@
 import Foundation
 import AtomXML
 
-struct Channel {
+public struct Channel {
     /// The title element holds character data that provides the name of the feed
-    let title: String
+    public let title: String
     /// The description element holds character data that provides a human-readable characterization or summary of the feed
-    let description: String
+    public let description: String
     /// The link element identifies the URL of the web site associated with the feed
-    let link: URL
+    public let link: URL
 
     /// The category element identifies a category or tag to which the feed belongs
-    let categories: [Category]
+    public let categories: [Category]
     /// The copyright element declares the human-readable copyright statement that applies to the feed
-    let copyright: String?
+    public let copyright: String?
     /// The generator element credits the software that created the feed
-    let generator: String?
+    public let generator: String?
     /// The image element supplies a graphical logo for the feed
-    let image: Image?
+    public let image: Image?
     /// The channel's language element identifies the natural language employed in the feed
-    let language: String?
+    public let language: String?
     /// The channel's lastBuildDate element indicates the last date and time the content of the feed was updated
-    let lastBuildDate: Date?
+    public let lastBuildDate: Date?
     /// The channel's managingEditor element provides the e-mail address of the person to contact regarding the editorial content of the feed
-    let managingEditor: String?
+    public let managingEditor: String?
     /// The channel's pubDate element indicates the publication date and time of the feed's content
-    let pubDate: Date?
+    public let pubDate: Date?
     /// The channel's skipDays element identifies days of the week during which the feed is not updated
-    let skipDays: SkipDays
+    public let skipDays: SkipDays
     /// The channel's skipHours element identifies the hours of the day during which the feed is not updated
-    let skipHours: SkipHours
+    public let skipHours: SkipHours
     /// The channel's ttl element represents the feed's time to live (TTL): the maximum number of minutes to cache the data before an aggregator requests it again
-    let ttl: Int?
+    public let ttl: Int?
     /// The channel's webMaster element provides the e-mail address of the person to contact about technical issues regarding the feed
-    let webMaster: String?
+    public let webMaster: String?
     
-    let items: [Item]
+    public let items: [Item]
     
     // Unsupported fields: cloud, docs, rating, textInput
 }
