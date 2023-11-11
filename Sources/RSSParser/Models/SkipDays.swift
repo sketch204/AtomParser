@@ -23,23 +23,19 @@ extension SkipDays {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("skipDays")
         
-        var output: Self = []
-        
-        xmlNode.childNodes(name: "day")
+        self = xmlNode.childNodes(name: "day")
             .map(\.content)
-            .forEach { day in
+            .reduce(SkipDays()) { (output, day) in
                 switch day {
-                case "Sunday": output.insert(.sunday)
-                case "Monday": output.insert(.monday)
-                case "Tuesday": output.insert(.tuesday)
-                case "Wednesday": output.insert(.wednesday)
-                case "Thursday": output.insert(.thursday)
-                case "Friday": output.insert(.friday)
-                case "Saturday": output.insert(.saturday)
-                default: break
+                case "Sunday": output.union(.sunday)
+                case "Monday": output.union(.monday)
+                case "Tuesday": output.union(.tuesday)
+                case "Wednesday": output.union(.wednesday)
+                case "Thursday": output.union(.thursday)
+                case "Friday": output.union(.friday)
+                case "Saturday": output.union(.saturday)
+                default: output
                 }
             }
-        
-        self = output
     }
 }
