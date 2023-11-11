@@ -16,17 +16,17 @@ import XCTest
         XCTAssertEqual(node, expectedNode)
     }
      
-     func test_selfClosingNodeNameIsLowercase() throws {
-         let xml = """
-         <?xml version="1.0" encoding="utf-8"?>
-         <roOt/>
-         """
-         
-         let parser = try AtomXMLParser(string: xml)
-         let node = try parser.parse()
-         
-         XCTAssertEqual(node.name, "root")
-     }
+//     func test_selfClosingNodeNameIsLowercase() throws {
+//         let xml = """
+//         <?xml version="1.0" encoding="utf-8"?>
+//         <roOt/>
+//         """
+//         
+//         let parser = try AtomXMLParser(string: xml)
+//         let node = try parser.parse()
+//         
+//         XCTAssertEqual(node.name, "root")
+//     }
     
     func test_parsesSelfClosingNode_withAttributes() throws {
         let xml = """
@@ -62,17 +62,17 @@ import XCTest
         XCTAssertEqual(node, expectedNode)
     }
      
-     func test_nodeNameIsLowercase() throws {
-         let xml = """
-         <?xml version="1.0" encoding="utf-8"?>
-         <rOot></rOot>
-         """
-         
-         let parser = try AtomXMLParser(string: xml)
-         let node = try parser.parse()
-         
-         XCTAssertEqual(node.name, "root")
-     }
+//     func test_nodeNameIsLowercase() throws {
+//         let xml = """
+//         <?xml version="1.0" encoding="utf-8"?>
+//         <rOot></rOot>
+//         """
+//         
+//         let parser = try AtomXMLParser(string: xml)
+//         let node = try parser.parse()
+//         
+//         XCTAssertEqual(node.name, "root")
+//     }
     
     func test_parsesNode_trimsNewLine_whenNodeNotOnSameLine() throws {
         let xml = """
