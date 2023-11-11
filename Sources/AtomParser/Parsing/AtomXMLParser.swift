@@ -63,7 +63,7 @@ extension AtomXMLParser: XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        print("Parsing \(elementName), attributes: \(attributeDict)")
+//        print("Parsing \(elementName), attributes: \(attributeDict)")
         startNewNode(name: elementName, attributes: attributeDict)
     }
     
