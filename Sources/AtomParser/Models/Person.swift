@@ -9,12 +9,10 @@ public struct Person {
 
 extension Person {
     init(xmlNode: AtomXMLNode) throws {
-        guard ["author", "contributor"].contains(xmlNode.name) else {
-            throw ParsingError.invalidNode
-        }
+        try xmlNode.checkName("author", "contributor")
         
         guard let nameNode = xmlNode.childNode(name: "name") else {
-            throw ParsingError.missingRequiredFields
+            throw MissingRequiredFields()
         }
         
         let uri: URL? = xmlNode.childNode(name: "uri").flatMap({ URL(string: $0.content) })

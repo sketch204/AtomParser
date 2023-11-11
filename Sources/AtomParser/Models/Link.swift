@@ -27,10 +27,10 @@ extension Link {
 
 extension Link {
     init(xmlNode: AtomXMLNode) throws {
-        guard xmlNode.name == "link" else { throw ParsingError.invalidNode }
+        try xmlNode.checkName("link")
         
         guard let url = xmlNode.attributes["href"].flatMap(URL.init(string:)) else {
-            throw ParsingError.missingRequiredFields
+            throw MissingRequiredFields()
         }
         
         self.init(

@@ -9,12 +9,10 @@ public struct Category {
 
 extension Category {
     init(xmlNode: AtomXMLNode) throws {
-        guard xmlNode.name == "category" else {
-            throw ParsingError.invalidNode
-        }
+        try xmlNode.checkName("category")
         
         guard let term = xmlNode.attributes["term"] else {
-            throw ParsingError.missingRequiredFields
+            throw MissingRequiredFields()
         }
         
         let scheme: URL? = xmlNode.attributes["scheme"].flatMap(URL.init(string:))

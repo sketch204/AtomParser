@@ -23,15 +23,17 @@ public struct Feed {
 
 extension Feed {
     init(xmlNode: AtomXMLNode) throws {
-        guard xmlNode.name == "feed" else { throw ParsingError.invalidNode }
+        try xmlNode.checkName("feed")
         
         guard let idNode = xmlNode.childNode(name: "id"),
               let titleNode = xmlNode.childNode(name: "title"),
               let updatedNode = xmlNode.childNode(name: "updated")
-        else { throw ParsingError.missingRequiredFields }
+        else {
+            throw MissingRequiredFields()
+        }
         
         guard let uri = URL(string: idNode.content) else {
-            throw ParsingError.invalidURL
+            throw CorruptedData()
         }
         
         let title = try Text(xmlNode: titleNode)

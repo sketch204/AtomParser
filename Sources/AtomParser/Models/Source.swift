@@ -9,17 +9,17 @@ public struct Source {
 
 extension Source {
     init(xmlNode: AtomXMLNode) throws {
-        guard xmlNode.name == "source" else {
-            throw ParsingError.invalidNode
-        }
+        try xmlNode.checkName("source")
         
         guard let idNode = xmlNode.childNode(name: "id"),
               let titleNode = xmlNode.childNode(name: "title"),
               let updatedNode = xmlNode.childNode(name: "updated")
-        else { throw ParsingError.missingRequiredFields }
+        else {
+            throw MissingRequiredFields()
+        }
         
         guard let uri = URL(string: idNode.content) else {
-            throw ParsingError.invalidURL
+            throw CorruptedData()
         }
         
         let title = try Text(xmlNode: titleNode)

@@ -20,9 +20,7 @@ public struct Text {
 
 extension Text {
     init(xmlNode: AtomXMLNode) throws {
-        guard ["title", "summary", "subtitle", "content", "rights"].contains(xmlNode.name) else {
-            throw ParsingError.invalidNode
-        }
+        try xmlNode.checkName("title", "summary", "subtitle", "content", "rights")
         
         self.init(
             type: xmlNode.attributes["type"].map(TextType.init(rawValue:)) ?? .text,
