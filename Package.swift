@@ -20,6 +20,15 @@ let package = Package(
         ),
         
         .target(
+            name: "RSSParser",
+            dependencies: ["AtomXML"]
+        ),
+        .testTarget(
+            name: "RSSParserTests",
+            dependencies: ["RSSParser", "AtomXML"]
+        ),
+        
+        .target(
             name: "AtomXML"
         ),
         .testTarget(
