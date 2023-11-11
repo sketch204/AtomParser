@@ -253,6 +253,77 @@ import XCTest
         
         XCTAssertEqual(node, expectedNode)
     }
+     
+     func test_parsesCData() throws {
+         let xml = """
+         <?xml version="1.0" encoding="utf-8"?>
+         <root><![CDATA[SwiftData]]></root>
+         """
+         
+         let parser = try AtomXMLParser(string: xml)
+         let node = try parser.parse()
+         
+         let expectedNode = AtomXMLNode(
+             name: "root",
+             content: "SwiftData"
+         )
+         
+         XCTAssertEqual(node, expectedNode)
+     }
+     
+     func test_parsesMultilineCData() throws {
+         let xml = """
+         <?xml version="1.0" encoding="utf-8"?>
+         <root>
+            <![CDATA[SwiftData]]>
+         </root>
+         """
+         
+         let parser = try AtomXMLParser(string: xml)
+         let node = try parser.parse()
+         
+         let expectedNode = AtomXMLNode(
+             name: "root",
+             content: "SwiftData"
+         )
+         
+         XCTAssertEqual(node, expectedNode)
+     }
+     func test_parsesMultilineCData2() throws {
+         let xml = """
+         <?xml version="1.0" encoding="utf-8"?>
+         <root>
+         <![CDATA[Paragraph one.
+         
+         Paragraph two.
+         
+         <span class="s-keyword">var</span> text: <span class="s-type">String</span>
+         
+         Another paragraph[&#8230;]]]>
+         </root>
+         """
+         
+         let parser = try AtomXMLParser(string: xml)
+         let node = try parser.parse()
+         
+         let expectedNode = AtomXMLNode(
+             name: "root",
+             content: """
+             Paragraph one.
+             
+             Paragraph two.
+             
+             <span class="s-keyword">var</span> text: <span class="s-type">String</span>
+             
+             Another paragraph[&#8230;]
+             """
+         )
+         
+         dump(node)
+         dump(expectedNode)
+         
+         XCTAssertEqual(node, expectedNode)
+     }
 }
 
 extension AtomXMLNode: Equatable {
