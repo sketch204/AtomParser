@@ -106,7 +106,7 @@ final class AtomParserTests: XCTestCase {
                 links: [
                     Link(
                         url: URL(string: "https://inalgotov.com/2023/09/07/how-to-use-tables-in-swiftui.html")!,
-                        relationship: "alternate",
+                        relationship: .alternate,
                         type: "text/html",
                         title: "How to use Tables in SwiftUI",
                         length: 0
@@ -132,7 +132,7 @@ final class AtomParserTests: XCTestCase {
                 links: [
                     Link(
                         url: URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt1.html")!,
-                        relationship: "alternate",
+                        relationship: .alternate,
                         type: "text/html",
                         title: "From C to Swift - Part 1",
                         length: 0
@@ -160,7 +160,7 @@ final class AtomParserTests: XCTestCase {
                 links: [
                     Link(
                         url: URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt2.html")!,
-                        relationship: "alternate",
+                        relationship: .alternate,
                         type: "text/html",
                         title: "From C to Swift - Part 2",
                         length: 0
@@ -188,7 +188,7 @@ final class AtomParserTests: XCTestCase {
                 links: [
                     Link(
                         url: URL(string: "https://inalgotov.com/2023/05/01/xcode-bag-of-trick.html")!,
-                        relationship: "alternate",
+                        relationship: .alternate,
                         type: "text/html",
                         title: "Big bag of Xcode tips & tricks",
                         length: 0
@@ -207,14 +207,14 @@ final class AtomParserTests: XCTestCase {
         links: [
             Link(
                 url: URL(string: "https://inalgotov.com/feed.xml")!,
-                relationship: "self",
+                relationship: .self,
                 type: "application/atom+xml",
                 title: nil,
                 length: 0
             ),
             Link(
                 url: URL(string: "https://inalgotov.com/")!,
-                relationship: "alternate",
+                relationship: .alternate,
                 type: "text/html",
                 title: nil,
                 length: 0

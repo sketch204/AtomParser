@@ -33,7 +33,7 @@ final class LinkParsingTests: XCTestCase {
         )
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: "alternate", type: nil, title: nil, length: 0)
+        let expectedLink = Link(url: sampleURL, relationship: .alternate, type: nil, title: nil, length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
