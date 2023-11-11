@@ -1,5 +1,5 @@
 import XCTest
-@testable import AtomParser
+@testable import AtomXML
 
  class XMLParserTests: XCTestCase {
     func test_parsesSelfClosingNode() throws {

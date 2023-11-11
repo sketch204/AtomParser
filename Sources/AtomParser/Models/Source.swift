@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Source {
     public let uri: URL // id

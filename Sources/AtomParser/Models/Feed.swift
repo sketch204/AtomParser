@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Feed {
     public let uri: URL // id

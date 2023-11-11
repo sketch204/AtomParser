@@ -1,9 +1,9 @@
-struct AtomXMLNode {
-    var name: String
-    var attributes: [String: String] = [:]
-    var content: String = ""
+public struct AtomXMLNode {
+    public var name: String
+    public var attributes: [String: String] = [:]
+    public var content: String = ""
     
-    var children: [AtomXMLNode] = []
+    public var children: [AtomXMLNode] = []
     
     init(
         name: String,
@@ -19,11 +19,11 @@ struct AtomXMLNode {
 }
 
 extension AtomXMLNode {
-    func childNode(name: String) -> AtomXMLNode? {
+    public func childNode(name: String) -> AtomXMLNode? {
         children.first(where: { $0.name == name })
     }
     
-    func childNodes(name: String) -> [AtomXMLNode] {
+    public func childNodes(name: String) -> [AtomXMLNode] {
         children.filter({ $0.name == name })
     }
 }

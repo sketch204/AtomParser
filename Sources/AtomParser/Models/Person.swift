@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Person {
     public let name: String

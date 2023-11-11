@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Link {
     public let url: URL // href

@@ -1,7 +1,7 @@
 import Foundation
 
-final class AtomXMLParser: NSObject {
-    enum Error: Swift.Error {
+public final class AtomXMLParser: NSObject {
+    public enum Error: Swift.Error {
         case unableToReadURL
         case unableToReadString
         case failedToParse
@@ -48,7 +48,7 @@ final class AtomXMLParser: NSObject {
         self.init(data: data)
     }
     
-    func parse() throws -> AtomXMLNode {
+    public func parse() throws -> AtomXMLNode {
         guard parser.parse(), let tree else { throw Error.failedToParse }
         
         return tree
@@ -58,20 +58,20 @@ final class AtomXMLParser: NSObject {
 
 
 extension AtomXMLParser: XMLParserDelegate {
-    func parserDidStartDocument(_ parser: XMLParser) {
+    public func parserDidStartDocument(_ parser: XMLParser) {
         resetState()
     }
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
 //        print("Parsing \(elementName), attributes: \(attributeDict)")
         startNewNode(name: elementName, attributes: attributeDict)
     }
     
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {
         addAccumulatedContent(string)
     }
     
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         assert(elementName.lowercased() == topStackNode?.name)
         
         assignAccumulatedStringToTopNode()

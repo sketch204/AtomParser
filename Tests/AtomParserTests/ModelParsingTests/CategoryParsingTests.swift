@@ -1,4 +1,5 @@
 import XCTest
+@testable import AtomXML
 @testable import AtomParser
 
 final class CategoryParsingTests: XCTestCase {

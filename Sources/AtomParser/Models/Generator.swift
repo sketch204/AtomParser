@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Generator {
     public let name: String

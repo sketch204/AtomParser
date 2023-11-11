@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Category {
     public let term: String

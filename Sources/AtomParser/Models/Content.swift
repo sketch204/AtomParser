@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public enum Content {
     case embedded(Text)

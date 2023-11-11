@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 extension Feed {
     public init(contentsOf url: URL) throws {

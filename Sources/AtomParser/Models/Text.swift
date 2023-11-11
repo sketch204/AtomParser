@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Text {
     public struct TextType: RawRepresentable {

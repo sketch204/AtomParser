@@ -1,4 +1,5 @@
 import Foundation
+import AtomXML
 
 public struct Image {
     public let path: String
