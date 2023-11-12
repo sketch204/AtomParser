@@ -11,6 +11,9 @@ struct RSSParser {
         case "feed":
             return try Feed(xmlNode: tree)
             
+        case "rss":
+            return try RSS(xmlNode: tree)
+            
         default:
             throw UnrecognizedFeedFormat()
         }
