@@ -7,7 +7,12 @@ let package = Package(
     products: [
         .library(
             name: "AtomParser",
-            targets: ["AtomParser"]),
+            targets: ["AtomParser"]
+        ),
+        .library(
+            name: "RSSParser",
+            targets: ["RSSParser"]
+        )
     ],
     targets: [
         .target(
