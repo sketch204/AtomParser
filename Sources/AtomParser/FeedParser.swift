@@ -1,10 +1,10 @@
 import Foundation
 import AtomXML
 
-struct FeedParser {
+public struct FeedParser {
     let parser: AtomXMLParser
     
-    func parse() throws -> FeedFormat {
+    public func parse() throws -> FeedFormat {
         let tree = try parser.parse()
         
         switch tree.name {
