@@ -1,7 +1,7 @@
 import Foundation
 import AtomXML
 
-struct RSSParser {
+struct FeedParser {
     let parser: AtomXMLParser
     
     func parse() throws -> FeedFormat {
@@ -20,7 +20,7 @@ struct RSSParser {
     }
 }
 
-extension RSSParser {
+extension FeedParser {
     public init(contentsOf url: URL) throws {
         self.init(parser: try AtomXMLParser(contentsOf: url))
     }
