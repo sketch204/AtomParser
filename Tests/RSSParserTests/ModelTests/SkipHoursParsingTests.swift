@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class SkipHoursParsingTests: XCTestCase {
     func test_whenAllHoursProvided_parses() throws {

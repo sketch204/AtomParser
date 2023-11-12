@@ -1,7 +1,7 @@
 import Foundation
 import AtomXML
 
-public struct Image {
+public struct RSSImage {
     /// The image's link element identifies the URL of the web site represented by the image. This SHOULD be the same URL as the channel's link element.
     public let link: URL
     /// The image's title element holds character data that provides a human-readable description of the image
@@ -17,7 +17,7 @@ public struct Image {
     public let height: Int?
 }
 
-extension Image {
+extension RSSImage {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("image")
         

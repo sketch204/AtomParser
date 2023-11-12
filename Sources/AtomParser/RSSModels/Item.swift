@@ -13,7 +13,7 @@ public struct Item {
     /// An item's author element provides the e-mail address of the person who wrote the item
     public let author: String?
     /// An item's category element identifies a category or tag to which the item belongs
-    public let categories: [Category]
+    public let categories: [RSSCategory]
     /// An item's comments element identifies the URL of a web page that contains comments received in response to the item
     public let commentsUrl: URL?
     /// An item's pubDate element indicates the publication date and time of the item
@@ -39,9 +39,9 @@ extension Item {
             guid: try xmlNode.childNode(name: "guid").map(GUID.init(xmlNode:)),
             link: xmlNode.childNode(name: "link").flatMap({ URL(string: $0.content) }),
             author: xmlNode.childNode(name: "author")?.content,
-            categories: try xmlNode.childNodes(name: "category").map(Category.init(xmlNode:)),
+            categories: try xmlNode.childNodes(name: "category").map(RSSCategory.init(xmlNode:)),
             commentsUrl: xmlNode.childNode(name: "comments").flatMap({ URL(string: $0.content) }),
-            pubDate: try xmlNode.childNode(name: "pubDate").map({ try parseDate($0.content) })
+            pubDate: try xmlNode.childNode(name: "pubDate").map({ try parseRssDate($0.content) })
         )
     }
 }

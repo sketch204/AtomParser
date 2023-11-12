@@ -11,11 +11,11 @@ public struct Feed {
     public let links: [Link]
     public let authors: [Person]
     
-    public let categories: [Category]
+    public let categories: [AtomCategory]
     public let contributors: [Person]
     public let generator: Generator?
-    public let icon: Image?
-    public let logo: Image?
+    public let icon: AtomImage?
+    public let logo: AtomImage?
     public let rights: Text?
     public let subtitle: Text?
 }
@@ -37,7 +37,7 @@ extension Feed {
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try parseDate(updatedNode.content)
+        let updated = try parseAtomDate(updatedNode.content)
         
         let entries = try xmlNode.childNodes(name: "entry")
             .map(Entry.init(xmlNode:))
@@ -48,16 +48,16 @@ extension Feed {
             .map(Person.init(xmlNode:))
         
         let categories = try xmlNode.childNodes(name: "category")
-            .map(Category.init(xmlNode:))
+            .map(AtomCategory.init(xmlNode:))
         let contributors = try xmlNode.childNodes(name: "contributor")
             .map(Person.init(xmlNode:))
         
         let generator = try xmlNode.childNode(name: "generator")
             .map(Generator.init(xmlNode:))
         let icon = try xmlNode.childNode(name: "icon")
-            .map(Image.init(xmlNode:))
+            .map(AtomImage.init(xmlNode:))
         let logo = try xmlNode.childNode(name: "logo")
-            .map(Image.init(xmlNode:))
+            .map(AtomImage.init(xmlNode:))
         let rights = try xmlNode.childNode(name: "rights")
             .map(Text.init(xmlNode:))
         let subtitle = try xmlNode.childNode(name: "subtitle")

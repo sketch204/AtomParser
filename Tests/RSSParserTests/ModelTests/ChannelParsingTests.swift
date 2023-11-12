@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class ChannelParsingTests: XCTestCase {
     func test_whenRequiredFieldsProvider_parses() throws {
@@ -89,7 +89,7 @@ final class ChannelParsingTests: XCTestCase {
             description: "A description",
             link: URL(string: "https://hello.mock")!,
             categories: [
-                Category(name: "A category", domain: nil),
+                RSSCategory(name: "A category", domain: nil),
             ],
             copyright: nil,
             generator: nil,
@@ -127,9 +127,9 @@ final class ChannelParsingTests: XCTestCase {
             description: "A description",
             link: URL(string: "https://hello.mock")!,
             categories: [
-                Category(name: "A category", domain: nil),
-                Category(name: "Another category", domain: nil),
-                Category(name: "A better category", domain: nil),
+                RSSCategory(name: "A category", domain: nil),
+                RSSCategory(name: "Another category", domain: nil),
+                RSSCategory(name: "A better category", domain: nil),
             ],
             copyright: nil,
             generator: nil,
@@ -239,7 +239,7 @@ final class ChannelParsingTests: XCTestCase {
             categories: [],
             copyright: nil,
             generator: nil,
-            image: Image(
+            image: RSSImage(
                 link: URL(string: "https://hello.mock")!,
                 title: "A title",
                 url: URL(string: "https://hello.mock")!,
@@ -316,7 +316,7 @@ final class ChannelParsingTests: XCTestCase {
             generator: nil,
             image: nil,
             language: nil,
-            lastBuildDate: try parseDate("Thu, 15 Jun 2023 10:54:15 +0200"),
+            lastBuildDate: try parseRssDate("Thu, 15 Jun 2023 10:54:15 +0200"),
             managingEditor: nil,
             pubDate: nil,
             skipDays: [],
@@ -386,7 +386,7 @@ final class ChannelParsingTests: XCTestCase {
             language: nil,
             lastBuildDate: nil,
             managingEditor: nil,
-            pubDate: try parseDate("Thu, 15 Jun 2023 10:54:15 +0200"),
+            pubDate: try parseRssDate("Thu, 15 Jun 2023 10:54:15 +0200"),
             skipDays: [],
             skipHours: SkipHours(hours: []),
             ttl: nil,

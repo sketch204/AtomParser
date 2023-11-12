@@ -10,13 +10,13 @@ public struct Channel {
     public let link: URL
 
     /// The category element identifies a category or tag to which the feed belongs
-    public let categories: [Category]
+    public let categories: [RSSCategory]
     /// The copyright element declares the human-readable copyright statement that applies to the feed
     public let copyright: String?
     /// The generator element credits the software that created the feed
     public let generator: String?
     /// The image element supplies a graphical logo for the feed
-    public let image: Image?
+    public let image: RSSImage?
     /// The channel's language element identifies the natural language employed in the feed
     public let language: String?
     /// The channel's lastBuildDate element indicates the last date and time the content of the feed was updated
@@ -56,14 +56,14 @@ extension Channel {
             title: titleNode.content,
             description: descriptionNode.content,
             link: linkUrl,
-            categories: try xmlNode.childNodes(name: "category").map(Category.init(xmlNode:)),
+            categories: try xmlNode.childNodes(name: "category").map(RSSCategory.init(xmlNode:)),
             copyright: xmlNode.childNode(name: "copyright")?.content,
             generator: xmlNode.childNode(name: "generator")?.content,
-            image: try xmlNode.childNode(name: "image").map(Image.init(xmlNode:)),
+            image: try xmlNode.childNode(name: "image").map(RSSImage.init(xmlNode:)),
             language: xmlNode.childNode(name: "language")?.content,
-            lastBuildDate: try xmlNode.childNode(name: "lastBuildDate").map(\.content).map(parseDate(_:)),
+            lastBuildDate: try xmlNode.childNode(name: "lastBuildDate").map(\.content).map(parseRssDate(_:)),
             managingEditor: xmlNode.childNode(name: "managingEditor")?.content,
-            pubDate: try xmlNode.childNode(name: "pubDate").map(\.content).map(parseDate(_:)),
+            pubDate: try xmlNode.childNode(name: "pubDate").map(\.content).map(parseRssDate(_:)),
             skipDays: try xmlNode.childNode(name: "skipDays").map(SkipDays.init(xmlNode:)) ?? [],
             skipHours: try xmlNode.childNode(name: "skipHours").map(SkipHours.init(xmlNode:)) ?? SkipHours(hours: []),
             ttl: xmlNode.childNode(name: "ttl").flatMap({ Int($0.content) }),

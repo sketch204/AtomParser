@@ -11,7 +11,7 @@ public struct Entry {
     public let links: [Link]
     public let summary: Text?
     
-    public let categories: [Category]
+    public let categories: [AtomCategory]
     public let contributors: [Person]
     public let published: Date?
     public let rights: Text?
@@ -32,7 +32,7 @@ extension Entry {
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try parseDate(updatedNode.content)
+        let updated = try parseAtomDate(updatedNode.content)
         
         
         let authors = try xmlNode.childNodes(name: "author")
@@ -45,11 +45,11 @@ extension Entry {
             .map(Text.init(xmlNode:))
         
         let categories = try xmlNode.childNodes(name: "category")
-            .map(Category.init(xmlNode:))
+            .map(AtomCategory.init(xmlNode:))
         let contributors = try xmlNode.childNodes(name: "contributor")
             .map(Person.init(xmlNode:))
         let published = try xmlNode.childNode(name: "published")
-            .map({ try parseDate($0.content) })
+            .map({ try parseAtomDate($0.content) })
         let rights = try xmlNode.childNode(name: "rights")
             .map(Text.init(xmlNode:))
         let source = try xmlNode.childNode(name: "source")

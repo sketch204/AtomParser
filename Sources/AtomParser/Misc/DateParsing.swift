@@ -1,5 +1,20 @@
 import Foundation
 
+
+// MARK: Atom
+
+let dateFormatter = ISO8601DateFormatter()
+    
+func parseAtomDate(_ dateString: String) throws -> Date {
+    guard let date = dateFormatter.date(from: dateString) else {
+        throw UnsupportedDateFormat()
+    }
+    return date
+}
+
+
+// MARK: RSS
+
 private func createDateFormatter(_ formatString: String) -> DateFormatter {
     let output = DateFormatter()
     output.dateFormat = formatString
@@ -19,7 +34,7 @@ private let formatters = [
     createDateFormatter("d MMM yyyy HH:mm"),
 ]
 
-func parseDate(_ string: String) throws -> Date {
+func parseRssDate(_ string: String) throws -> Date {
     var output: Date?
     let uppercasedString = string.uppercased()
     
@@ -34,3 +49,4 @@ func parseDate(_ string: String) throws -> Date {
     
     return output
 }
+

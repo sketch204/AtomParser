@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class ItemParsingTests: XCTestCase {
     func test_whenTitleProvided_parses() throws {
@@ -149,7 +149,7 @@ final class ItemParsingTests: XCTestCase {
             link: nil,
             author: nil,
             categories: [
-                Category(name: "A category", domain: nil),
+                RSSCategory(name: "A category", domain: nil),
             ],
             commentsUrl: nil,
             pubDate: nil
@@ -177,9 +177,9 @@ final class ItemParsingTests: XCTestCase {
             link: nil,
             author: nil,
             categories: [
-                Category(name: "A category", domain: nil),
-                Category(name: "Another category", domain: nil),
-                Category(name: "A better category", domain: nil),
+                RSSCategory(name: "A category", domain: nil),
+                RSSCategory(name: "Another category", domain: nil),
+                RSSCategory(name: "A better category", domain: nil),
             ],
             commentsUrl: nil,
             pubDate: nil
@@ -230,7 +230,7 @@ final class ItemParsingTests: XCTestCase {
             author: nil,
             categories: [],
             commentsUrl: nil,
-            pubDate: try parseDate("Tue, 17 Oct 2023 18:35:48 +0000")
+            pubDate: try parseRssDate("Tue, 17 Oct 2023 18:35:48 +0000")
         )
         
         XCTAssertEqual(item, expectedItem)

@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class ImageParsingTests: XCTestCase {
     func test_whenAllRequiredFieldsProvided_parses() throws {
@@ -13,8 +13,8 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        let image = try Image(xmlNode: xml)
-        let expectedImage = Image(
+        let image = try RSSImage(xmlNode: xml)
+        let expectedImage = RSSImage(
             link: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
@@ -35,7 +35,7 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
     
     func test_whenTitleMissing_doesNotParse() throws {
@@ -47,7 +47,7 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
     
     func test_whenUrlMissing_doesNotParse() throws {
@@ -59,7 +59,7 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
     
     func test_whenDescriptionProvided_parses() throws {
@@ -73,8 +73,8 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        let image = try Image(xmlNode: xml)
-        let expectedImage = Image(
+        let image = try RSSImage(xmlNode: xml)
+        let expectedImage = RSSImage(
             link: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
@@ -97,8 +97,8 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        let image = try Image(xmlNode: xml)
-        let expectedImage = Image(
+        let image = try RSSImage(xmlNode: xml)
+        let expectedImage = RSSImage(
             link: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
@@ -121,8 +121,8 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        let image = try Image(xmlNode: xml)
-        let expectedImage = Image(
+        let image = try RSSImage(xmlNode: xml)
+        let expectedImage = RSSImage(
             link: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
@@ -144,7 +144,7 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
     
     func test_whenUrlIsInvalid_doesNotParse() throws {
@@ -157,7 +157,7 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
     
     func test_whenInvalidTag_doesNotParse() throws {
@@ -169,11 +169,11 @@ final class ImageParsingTests: XCTestCase {
             ]
         )
         
-        XCTAssertThrowsError(try Image(xmlNode: xml))
+        XCTAssertThrowsError(try RSSImage(xmlNode: xml))
     }
 }
 
-extension Image: Equatable {
+extension RSSImage: Equatable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.link == rhs.link
         && lhs.title == rhs.title

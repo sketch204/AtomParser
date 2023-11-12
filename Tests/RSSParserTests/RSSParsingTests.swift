@@ -1,5 +1,5 @@
 import XCTest
-@testable import RSSParser
+@testable import AtomParser
 
 final class RSSParsingTests: XCTestCase {
     let rssString = """
@@ -78,7 +78,7 @@ final class RSSParsingTests: XCTestCase {
             categories: [],
             copyright: nil,
             generator: "https://wordpress.org/?v=5.8",
-            image: Image(
+            image: RSSImage(
                 link: URL(string: "https://www.donnywals.com")!,
                 title: "Donny Wals",
                 url: URL(string: "https://www.donnywals.com/wp-content/uploads/cropped-site-icon-32x32.png")!,
@@ -87,7 +87,7 @@ final class RSSParsingTests: XCTestCase {
                 height: 32
             ),
             language: "en-US",
-            lastBuildDate: try! parseDate("Tue, 17 Oct 2023 18:35:48 +0000"),
+            lastBuildDate: try! parseRssDate("Tue, 17 Oct 2023 18:35:48 +0000"),
             managingEditor: nil,
             pubDate: nil,
             skipDays: [],
@@ -101,9 +101,9 @@ final class RSSParsingTests: XCTestCase {
                     guid: GUID(contents: "https://www.donnywals.com/?p=2086", isPermaLink: false),
                     link: URL(string: "https://www.donnywals.com/making-your-swiftdata-models-codable/")!,
                     author: nil,
-                    categories: [Category(name: "SwiftData", domain: nil)],
+                    categories: [RSSCategory(name: "SwiftData", domain: nil)],
                     commentsUrl: nil,
-                    pubDate: try! parseDate("Tue, 15 Aug 2023 12:56:12 +0000")
+                    pubDate: try! parseRssDate("Tue, 15 Aug 2023 12:56:12 +0000")
                 ),
                 Item(
                     title: "What’s the difference between @Binding and @Bindable",
@@ -111,9 +111,9 @@ final class RSSParsingTests: XCTestCase {
                     guid: GUID(contents: "https://www.donnywals.com/?p=2052", isPermaLink: false),
                     link: URL(string: "https://www.donnywals.com/whats-the-difference-between-binding-and-bindable/")!,
                     author: nil,
-                    categories: [Category(name: "Swift", domain: nil)],
+                    categories: [RSSCategory(name: "Swift", domain: nil)],
                     commentsUrl: nil,
-                    pubDate: try! parseDate("Sat, 10 Jun 2023 18:18:16 +0000")
+                    pubDate: try! parseRssDate("Sat, 10 Jun 2023 18:18:16 +0000")
                 ),
             ]
         )

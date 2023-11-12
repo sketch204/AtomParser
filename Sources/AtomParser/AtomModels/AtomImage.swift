@@ -1,11 +1,11 @@
 import Foundation
 import AtomXML
 
-public struct Image {
+public struct AtomImage {
     public let path: String
 }
 
-extension Image {
+extension AtomImage {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("icon", "logo")
         

@@ -9,10 +9,6 @@ let package = Package(
             name: "AtomParser",
             targets: ["AtomParser"]
         ),
-        .library(
-            name: "RSSParser",
-            targets: ["RSSParser"]
-        )
     ],
     targets: [
         .target(
@@ -23,14 +19,9 @@ let package = Package(
             name: "AtomParserTests",
             dependencies: ["AtomParser", "AtomXML"]
         ),
-        
-        .target(
-            name: "RSSParser",
-            dependencies: ["AtomXML"]
-        ),
         .testTarget(
             name: "RSSParserTests",
-            dependencies: ["RSSParser", "AtomXML"]
+            dependencies: ["AtomParser", "AtomXML"]
         ),
         
         .target(

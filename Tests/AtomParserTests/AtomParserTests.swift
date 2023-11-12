@@ -114,7 +114,7 @@ final class AtomParserTests: XCTestCase {
                 ],
                 summary: Text(type: .html, content: "In this article we&apos;re going to take a quick look at how tables are setup and used in SwiftUI."),
                 categories: [
-                    Category(term: "SwiftUI", scheme: nil, label: nil),
+                    AtomCategory(term: "SwiftUI", scheme: nil, label: nil),
                 ],
                 contributors: [],
                 published: sampleDate,
@@ -140,9 +140,9 @@ final class AtomParserTests: XCTestCase {
                 ],
                 summary: Text(type: .html, content: "In this article I will walk you through the steps required to set up a C library as a SwiftPM package. This will allow you to use C code within a Swift project. I will then also show you how to use said C code from Swift, as well as how to make it more Swift-friendly."),
                 categories: [
-                    Category(term: "swiftpm", scheme: nil, label: nil),
-                    Category(term: "swift", scheme: nil, label: nil),
-                    Category(term: "c", scheme: nil, label: nil),
+                    AtomCategory(term: "swiftpm", scheme: nil, label: nil),
+                    AtomCategory(term: "swift", scheme: nil, label: nil),
+                    AtomCategory(term: "c", scheme: nil, label: nil),
                 ],
                 contributors: [],
                 published: sampleDate,
@@ -168,9 +168,9 @@ final class AtomParserTests: XCTestCase {
                 ],
                 summary: Text(type: .html, content: "In part 1 of this series we looked at how we can integrate a C library with SwiftPM such that we can import it into our code. In this article, we will be taking a look at how to actually use the C code, and what the edge cases of using C code in Swift are. If you missed the first part, I highly recommend you give it a read."),
                 categories: [
-                    Category(term: "swiftpm", scheme: nil, label: nil),
-                    Category(term: "swift", scheme: nil, label: nil),
-                    Category(term: "c", scheme: nil, label: nil),
+                    AtomCategory(term: "swiftpm", scheme: nil, label: nil),
+                    AtomCategory(term: "swift", scheme: nil, label: nil),
+                    AtomCategory(term: "c", scheme: nil, label: nil),
                 ],
                 contributors: [],
                 published: sampleDate,
@@ -196,7 +196,7 @@ final class AtomParserTests: XCTestCase {
                 ],
                 summary: Text(type: .html, content: "I’ve been a developer for a number of years now. Primarily iOS. Over the years I’ve learned to use Xcode quite efficiently. I won’t claim to now all the ins and outs of it but I do consider myself to know more than most. Below is a list of my learnings. Perhaps you’ll find them useful."),
                 categories: [
-                    Category(term: "xcode", scheme: nil, label: nil),
+                    AtomCategory(term: "xcode", scheme: nil, label: nil),
                 ],
                 contributors: [],
                 published: sampleDate,

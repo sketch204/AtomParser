@@ -6,7 +6,7 @@ final class CategoryParsingTests: XCTestCase {
     
 }
 
-extension AtomParser.Category: Equatable {
+extension AtomParser.AtomCategory: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.term == rhs.term
         && lhs.scheme == rhs.scheme

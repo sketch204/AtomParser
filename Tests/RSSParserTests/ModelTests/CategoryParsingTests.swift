@@ -1,13 +1,13 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class CategoryParsingTests: XCTestCase {
     func test_whenCategoryProvided_parses() throws {
         let xml = AtomXMLNode(name: "category", content: "A category")
         
-        let category = try Category(xmlNode: xml)
-        let expectedCategory = Category(name: "A category", domain: nil)
+        let category = try RSSCategory(xmlNode: xml)
+        let expectedCategory = RSSCategory(name: "A category", domain: nil)
         
         XCTAssertEqual(category, expectedCategory)
     }
@@ -15,8 +15,8 @@ final class CategoryParsingTests: XCTestCase {
     func test_whenCategoryWithDomainProvided_parses() throws {
         let xml = AtomXMLNode(name: "category", attributes: ["domain": "some domain"], content: "A category")
         
-        let category = try Category(xmlNode: xml)
-        let expectedCategory = Category(name: "A category", domain: "some domain")
+        let category = try RSSCategory(xmlNode: xml)
+        let expectedCategory = RSSCategory(name: "A category", domain: "some domain")
         
         XCTAssertEqual(category, expectedCategory)
     }
@@ -24,11 +24,11 @@ final class CategoryParsingTests: XCTestCase {
     func test_whenInvalidTagProvided_doesNotParse() throws {
         let xml = AtomXMLNode(name: "not a category")
         
-        XCTAssertThrowsError(try Category(xmlNode: xml))
+        XCTAssertThrowsError(try RSSCategory(xmlNode: xml))
     }
 }
 
-extension RSSParser.Category: Equatable {
+extension AtomParser.RSSCategory: Equatable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.name == rhs.name
         && lhs.domain == rhs.domain

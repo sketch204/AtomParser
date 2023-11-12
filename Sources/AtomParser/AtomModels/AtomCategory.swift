@@ -1,13 +1,13 @@
 import Foundation
 import AtomXML
 
-public struct Category {
+public struct AtomCategory {
     public let term: String
     public let scheme: URL?
     public let label: String?
 }
 
-extension Category {
+extension AtomCategory {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("category")
         

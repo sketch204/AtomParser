@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class GUIDParsingTests: XCTestCase {
     func test_whenIsPermaLinkOmitted_parses() throws {

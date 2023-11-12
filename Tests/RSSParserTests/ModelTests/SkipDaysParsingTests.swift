@@ -1,6 +1,6 @@
 import XCTest
 @testable import AtomXML
-@testable import RSSParser
+@testable import AtomParser
 
 final class SkipDaysParsingTests: XCTestCase {
     func test_whenAllDaysProvided_parses() throws {
