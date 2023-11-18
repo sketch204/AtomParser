@@ -10,6 +10,9 @@ let package = Package(
             targets: ["AtomParser"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/sketch204/AtomXML", .upToNextMinor(from: "1.0.0")),
+    ],
     targets: [
         .target(
             name: "AtomParser",
@@ -22,14 +25,6 @@ let package = Package(
         .testTarget(
             name: "RSSParserTests",
             dependencies: ["AtomParser", "AtomXML"]
-        ),
-        
-        .target(
-            name: "AtomXML"
-        ),
-        .testTarget(
-            name: "AtomXMLTests",
-            dependencies: ["AtomXML"]
         ),
     ]
 )

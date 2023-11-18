@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "atomxml",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sketch204/AtomXML",
+      "state" : {
+        "revision" : "7897a0cd99a34aef841f67db9fa627354a6d34e0",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
