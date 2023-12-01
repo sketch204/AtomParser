@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sketch204/AtomXML",
       "state" : {
-        "revision" : "7897a0cd99a34aef841f67db9fa627354a6d34e0",
-        "version" : "1.0.0"
+        "revision" : "1c9756faad3923b505e4cb286b3f6d634aab182d",
+        "version" : "1.0.1"
       }
     }
   ],

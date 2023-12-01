@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class TextParsingTests: XCTestCase {
     func test_parsesWithoutContent() throws {

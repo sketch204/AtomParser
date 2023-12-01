@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class ImageParsingTests: XCTestCase {
     func test_parses_whenIcon() throws {

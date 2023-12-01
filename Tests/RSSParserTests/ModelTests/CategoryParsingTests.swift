@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class CategoryParsingTests: XCTestCase {
     func test_whenCategoryProvided_parses() throws {

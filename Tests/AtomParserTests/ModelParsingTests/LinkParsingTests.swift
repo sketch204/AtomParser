@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class LinkParsingTests: XCTestCase {
     func test_parses() throws {

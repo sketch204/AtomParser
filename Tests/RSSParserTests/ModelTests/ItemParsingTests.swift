@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class ItemParsingTests: XCTestCase {
     func test_whenTitleProvided_parses() throws {

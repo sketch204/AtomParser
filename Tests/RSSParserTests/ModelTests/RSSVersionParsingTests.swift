@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class RSSVersionParsingTests: XCTestCase {
     func test_whenVersion2_0TagProvided_parses() throws {

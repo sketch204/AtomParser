@@ -20,11 +20,16 @@ let package = Package(
         ),
         .testTarget(
             name: "AtomParserTests",
-            dependencies: ["AtomParser", "AtomXML"]
+            dependencies: ["AtomParser", "AtomXML", "TestUtils"]
         ),
         .testTarget(
             name: "RSSParserTests",
-            dependencies: ["AtomParser", "AtomXML"]
+            dependencies: ["AtomParser", "AtomXML", "TestUtils"]
         ),
+        .target(
+            name: "TestUtils",
+            dependencies: ["AtomXML"],
+            path: "Tests/TestUtils"
+        )
     ]
 )

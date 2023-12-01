@@ -1,6 +1,7 @@
 import XCTest
 @testable import AtomXML
 @testable import AtomParser
+import TestUtils
 
 final class ChannelParsingTests: XCTestCase {
     func test_whenRequiredFieldsProvider_parses() throws {
