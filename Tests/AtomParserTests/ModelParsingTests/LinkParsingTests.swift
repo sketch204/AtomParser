@@ -8,7 +8,7 @@ final class LinkParsingTests: XCTestCase {
         let xml = AtomXMLNode(name: "link", attributes: ["href": sampleUrlString])
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: nil, type: nil, title: nil, length: 0)
+        let expectedLink = Link(href: .absolute(sampleURL), relationship: nil, type: nil, title: nil, length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
@@ -35,7 +35,7 @@ final class LinkParsingTests: XCTestCase {
         )
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: .alternate, type: nil, title: nil, length: 0)
+        let expectedLink = Link(href: .absolute(sampleURL), relationship: .alternate, type: nil, title: nil, length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
@@ -50,7 +50,7 @@ final class LinkParsingTests: XCTestCase {
         )
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: nil, type: "html", title: nil, length: 0)
+        let expectedLink = Link(href: .absolute(sampleURL), relationship: nil, type: "html", title: nil, length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
@@ -65,7 +65,7 @@ final class LinkParsingTests: XCTestCase {
         )
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: nil, type: nil, title: "Title", length: 0)
+        let expectedLink = Link(href: .absolute(sampleURL), relationship: nil, type: nil, title: "Title", length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
@@ -80,7 +80,28 @@ final class LinkParsingTests: XCTestCase {
         )
         
         let link = try Link(xmlNode: xml)
-        let expectedLink = Link(url: sampleURL, relationship: nil, type: nil, title: nil, length: 10)
+        let expectedLink = Link(href: .absolute(sampleURL), relationship: nil, type: nil, title: nil, length: 10)
+        
+        XCTAssertEqual(link, expectedLink)
+    }
+    
+    func test_parsesRelativeHref() throws {
+        let xml = AtomXMLNode(name: "link", attributes: ["href": "/path"])
+        
+        let link = try Link(xmlNode: xml)
+        let expectedLink = Link(href: .relative("/path"), relationship: nil, type: nil, title: nil, length: 0)
+        
+        dump(link)
+        dump(expectedLink)
+        
+        XCTAssertEqual(link, expectedLink)
+    }
+    
+    func test_parsesEmptyHref() throws {
+        let xml = AtomXMLNode(name: "link", attributes: ["href": ""])
+        
+        let link = try Link(xmlNode: xml)
+        let expectedLink = Link(href: .relative(""), relationship: nil, type: nil, title: nil, length: 0)
         
         XCTAssertEqual(link, expectedLink)
     }
@@ -88,7 +109,7 @@ final class LinkParsingTests: XCTestCase {
 
 extension Link: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.url == rhs.url
+        lhs.href == rhs.href
         && lhs.relationship == rhs.relationship
         && lhs.type == rhs.type
         && lhs.title == rhs.title

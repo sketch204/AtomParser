@@ -2,11 +2,18 @@ import Foundation
 import AtomXML
 
 public struct Link {
-    public let url: URL // href
+    public let href: HypertextReference
     public let relationship: Relationship?
     public let type: String?
     public let title: String?
     public let length: Int // in bytes
+}
+
+extension Link {
+    public enum HypertextReference: Equatable {
+        case absolute(URL)
+        case relative(String)
+    }
 }
 
 extension Link {
@@ -29,20 +36,20 @@ extension Link {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("link")
         
-        guard let urlString = xmlNode.attributes["href"] else {
+        guard let hrefString = xmlNode.attributes["href"] else {
             throw MissingRequiredFields(
                 path: xmlNode.path.replacingLastComponentAttribute(with: "href")
             )
         }
-        guard let url = URL(string: urlString) else {
-            throw InvalidURL(
-                urlString: urlString,
-                path: xmlNode.path.replacingLastComponentAttribute(with: "href")
-            )
+        let href: HypertextReference =
+        if (hrefString.hasPrefix("http") || hrefString.hasPrefix("https")), let url = URL(string: hrefString) {
+            .absolute(url)
+        } else {
+            .relative(hrefString)
         }
         
         self.init(
-            url: url,
+            href: href,
             relationship: xmlNode.attributes["rel"].map(Relationship.init(rawValue:)),
             type: xmlNode.attributes["type"],
             title: xmlNode.attributes["title"],

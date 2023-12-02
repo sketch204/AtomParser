@@ -105,7 +105,7 @@ final class AtomParserTests: XCTestCase {
                 content: .embedded(Text(type: .html, content: "In this article we’re going to take a quick look at how tables are setup and used in SwiftUI.")),
                 links: [
                     Link(
-                        url: URL(string: "https://inalgotov.com/2023/09/07/how-to-use-tables-in-swiftui.html")!,
+                        href: .absolute(URL(string: "https://inalgotov.com/2023/09/07/how-to-use-tables-in-swiftui.html")!),
                         relationship: .alternate,
                         type: "text/html",
                         title: "How to use Tables in SwiftUI",
@@ -131,7 +131,7 @@ final class AtomParserTests: XCTestCase {
                 content: .embedded(Text(type: .html, content: "In this article I will walk you through the steps required to set up a C library as a SwiftPM package. This will allow you to use C code within a Swift project. I will then also show you how to use said C code from Swift, as well as how to make it more Swift-friendly.")),
                 links: [
                     Link(
-                        url: URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt1.html")!,
+                        href: .absolute(URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt1.html")!),
                         relationship: .alternate,
                         type: "text/html",
                         title: "From C to Swift - Part 1",
@@ -159,7 +159,7 @@ final class AtomParserTests: XCTestCase {
                 content: .embedded(Text(type: .html, content: "In part 1 of this series we looked at how we can integrate a C library with SwiftPM such that we can import it into our code. In this article, we will be taking a look at how to actually use the C code, and what the edge cases of using C code in Swift are. If you missed the first part, I highly recommend you give it a read.")),
                 links: [
                     Link(
-                        url: URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt2.html")!,
+                        href: .absolute(URL(string: "https://inalgotov.com/2023/07/15/from-c-to-swift-pt2.html")!),
                         relationship: .alternate,
                         type: "text/html",
                         title: "From C to Swift - Part 2",
@@ -187,7 +187,7 @@ final class AtomParserTests: XCTestCase {
                 content: .embedded(Text(type: .html, content: "I’ve been a developer for a number of years now. Primarily iOS. Over the years I’ve learned to use Xcode quite efficiently. I won’t claim to now all the ins and outs of it but I do consider myself to know more than most. Below is a list of my learnings. Perhaps you’ll find them useful.")),
                 links: [
                     Link(
-                        url: URL(string: "https://inalgotov.com/2023/05/01/xcode-bag-of-trick.html")!,
+                        href: .absolute(URL(string: "https://inalgotov.com/2023/05/01/xcode-bag-of-trick.html")!),
                         relationship: .alternate,
                         type: "text/html",
                         title: "Big bag of Xcode tips & tricks",
@@ -206,14 +206,14 @@ final class AtomParserTests: XCTestCase {
         ],
         links: [
             Link(
-                url: URL(string: "https://inalgotov.com/feed.xml")!,
+                href: .absolute(URL(string: "https://inalgotov.com/feed.xml")!),
                 relationship: .self,
                 type: "application/atom+xml",
                 title: nil,
                 length: 0
             ),
             Link(
-                url: URL(string: "https://inalgotov.com/")!,
+                href: .absolute(URL(string: "https://inalgotov.com/")!),
                 relationship: .alternate,
                 type: "text/html",
                 title: nil,
