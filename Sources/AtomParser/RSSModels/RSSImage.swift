@@ -3,7 +3,7 @@ import AtomXML
 
 public struct RSSImage {
     /// The image's link element identifies the URL of the web site represented by the image. This SHOULD be the same URL as the channel's link element.
-    public let link: URL
+    public let websiteUrl: URL
     /// The image's title element holds character data that provides a human-readable description of the image
     public let title: String
     /// The image's url element identifies the URL of the image, which MUST be in the GIF, JPEG or PNG formats
@@ -40,7 +40,7 @@ extension RSSImage {
         }
         
         self.init(
-            link: linkUrl,
+            websiteUrl: linkUrl,
             title: titleNode.content,
             url: url,
             description: xmlNode.childNode(name: "description")?.content,

@@ -241,7 +241,7 @@ final class ChannelParsingTests: XCTestCase {
             copyright: nil,
             generator: nil,
             image: RSSImage(
-                link: URL(string: "https://hello.mock")!,
+                websiteUrl: URL(string: "https://hello.mock")!,
                 title: "A title",
                 url: URL(string: "https://hello.mock")!,
                 description: nil,

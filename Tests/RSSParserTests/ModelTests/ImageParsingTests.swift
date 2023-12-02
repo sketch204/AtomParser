@@ -16,7 +16,7 @@ final class ImageParsingTests: XCTestCase {
         
         let image = try RSSImage(xmlNode: xml)
         let expectedImage = RSSImage(
-            link: URL(string: "https://hello.mock")!,
+            websiteUrl: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
             description: nil,
@@ -76,7 +76,7 @@ final class ImageParsingTests: XCTestCase {
         
         let image = try RSSImage(xmlNode: xml)
         let expectedImage = RSSImage(
-            link: URL(string: "https://hello.mock")!,
+            websiteUrl: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
             description: "a description",
@@ -100,7 +100,7 @@ final class ImageParsingTests: XCTestCase {
         
         let image = try RSSImage(xmlNode: xml)
         let expectedImage = RSSImage(
-            link: URL(string: "https://hello.mock")!,
+            websiteUrl: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
             description: nil,
@@ -124,7 +124,7 @@ final class ImageParsingTests: XCTestCase {
         
         let image = try RSSImage(xmlNode: xml)
         let expectedImage = RSSImage(
-            link: URL(string: "https://hello.mock")!,
+            websiteUrl: URL(string: "https://hello.mock")!,
             title: "A title",
             url: URL(string: "https://hello.mock")!,
             description: nil,
@@ -176,7 +176,7 @@ final class ImageParsingTests: XCTestCase {
 
 extension RSSImage: Equatable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        lhs.link == rhs.link
+        lhs.websiteUrl == rhs.websiteUrl
         && lhs.title == rhs.title
         && lhs.url == rhs.url
         && lhs.description == rhs.description

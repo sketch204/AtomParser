@@ -79,7 +79,7 @@ final class RSSParsingTests: XCTestCase {
             copyright: nil,
             generator: "https://wordpress.org/?v=5.8",
             image: RSSImage(
-                link: URL(string: "https://www.donnywals.com")!,
+                websiteUrl: URL(string: "https://www.donnywals.com")!,
                 title: "Donny Wals",
                 url: URL(string: "https://www.donnywals.com/wp-content/uploads/cropped-site-icon-32x32.png")!,
                 description: nil,
