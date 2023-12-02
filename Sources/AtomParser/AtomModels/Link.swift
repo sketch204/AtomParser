@@ -11,8 +11,8 @@ public struct Link {
 
 extension Link {
     public enum HypertextReference: Equatable {
-        case absolute(URL)
-        case relative(String)
+        case absolute(_ url: URL)
+        case relative(_ path: String)
     }
 }
 
