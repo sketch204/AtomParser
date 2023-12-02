@@ -15,7 +15,10 @@ extension Content {
             if let url = URL(string: src) {
                 self = .linked(url)
             } else {
-                throw CorruptedData()
+                throw InvalidURL(
+                    urlString: src,
+                    path: xmlNode.path.replacingLastComponentAttribute(with: "src")
+                )
             }
         }
         else if let type = xmlNode.attributes["type"] {
@@ -26,7 +29,9 @@ extension Content {
             }
         }
         else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(
+                path: xmlNode.path.replacingLastComponentAttribute(with: "type")
+            )
         }
     }
 }

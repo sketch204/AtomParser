@@ -30,7 +30,7 @@ extension Item {
         let description = xmlNode.childNode(name: "description")?.content
         
         guard title != nil || description != nil else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "title"))
         }
         
         self.init(
@@ -41,7 +41,7 @@ extension Item {
             author: xmlNode.childNode(name: "author")?.content,
             categories: try xmlNode.childNodes(name: "category").map(RSSCategory.init(xmlNode:)),
             commentsUrl: xmlNode.childNode(name: "comments").flatMap({ URL(string: $0.content) }),
-            pubDate: try xmlNode.childNode(name: "pubDate").map({ try parseRssDate($0.content) })
+            pubDate: try xmlNode.childNode(name: "pubDate").map({ try parseRssDate($0.content, path: $0.path) })
         )
     }
 }

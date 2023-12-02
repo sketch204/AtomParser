@@ -12,7 +12,9 @@ extension AtomCategory {
         try xmlNode.checkName("category")
         
         guard let term = xmlNode.attributes["term"] else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(
+                path: xmlNode.path.replacingLastComponentAttribute(with: "term")
+            )
         }
         
         let scheme: URL? = xmlNode.attributes["scheme"].flatMap(URL.init(string:))

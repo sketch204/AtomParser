@@ -20,11 +20,13 @@ extension RSSVersion {
         try xmlNode.checkName("rss")
         
         guard let versionString = xmlNode.attributes["version"] else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(
+                path: xmlNode.path.replacingLastComponentAttribute(with: "version")
+            )
         }
         
         guard [Self.v0_91, .v0_92, .v2_0].contains(where: { $0.rawValue == versionString }) else {
-            throw UnsupportedRSSVersion()
+            throw UnsupportedRSSVersion(version: versionString)
         }
         
         self.rawValue = versionString

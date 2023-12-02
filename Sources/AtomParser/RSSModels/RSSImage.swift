@@ -21,14 +21,23 @@ extension RSSImage {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("image")
         
-        guard let linkNode = xmlNode.childNode(name: "link"),
-              let titleNode = xmlNode.childNode(name: "title"),
-              let urlNode = xmlNode.childNode(name: "url")
-        else { throw MissingRequiredFields() }
+        guard let linkNode = xmlNode.childNode(name: "link") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "link"))
+        }
+        guard let titleNode = xmlNode.childNode(name: "title") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "title"))
+        }
+        guard let urlNode = xmlNode.childNode(name: "url") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "url"))
+        }
         
-        guard let linkUrl = URL(string: linkNode.content),
-              let url = URL(string: urlNode.content)
-        else { throw CorruptedData() }
+        guard let linkUrl = URL(string: linkNode.content) else {
+            throw InvalidURL(urlString: linkNode.content, path: linkNode.path)
+        }
+        
+        guard let url = URL(string: urlNode.content) else {
+            throw InvalidURL(urlString: urlNode.content, path: urlNode.path)
+        }
         
         self.init(
             link: linkUrl,

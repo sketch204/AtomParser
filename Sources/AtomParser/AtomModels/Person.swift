@@ -12,7 +12,7 @@ extension Person {
         try xmlNode.checkName("author", "contributor")
         
         guard let nameNode = xmlNode.childNode(name: "name") else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "name"))
         }
         
         let uri: URL? = xmlNode.childNode(name: "uri").flatMap({ URL(string: $0.content) })

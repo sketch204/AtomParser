@@ -9,7 +9,7 @@ public struct RSS {
 extension RSS {
     init(xmlNode: AtomXMLNode) throws {
         guard let channelNode = xmlNode.childNode(name: "channel") else {
-            throw MissingRequiredFields()
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "channel"))
         }
         
         self.init(

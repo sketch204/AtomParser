@@ -43,13 +43,18 @@ extension Channel {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("channel")
         
-        guard let titleNode = xmlNode.childNode(name: "title"),
-              let descriptionNode = xmlNode.childNode(name: "description"),
-              let linkNode = xmlNode.childNode(name: "link")
-        else { throw MissingRequiredFields() }
+        guard let titleNode = xmlNode.childNode(name: "title") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "title"))
+        }
+        guard let descriptionNode = xmlNode.childNode(name: "description") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "description"))
+        }
+        guard let linkNode = xmlNode.childNode(name: "link") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "link"))
+        }
         
         guard let linkUrl = URL(string: linkNode.content) else {
-            throw CorruptedData()
+            throw InvalidURL(urlString: linkNode.content, path: linkNode.path)
         }
         
         self.init(
@@ -61,9 +66,9 @@ extension Channel {
             generator: xmlNode.childNode(name: "generator")?.content,
             image: try xmlNode.childNode(name: "image").map(RSSImage.init(xmlNode:)),
             language: xmlNode.childNode(name: "language")?.content,
-            lastBuildDate: try xmlNode.childNode(name: "lastBuildDate").map(\.content).map(parseRssDate(_:)),
+            lastBuildDate: try xmlNode.childNode(name: "lastBuildDate").map({ try parseRssDate($0.content, path: $0.path) }),
             managingEditor: xmlNode.childNode(name: "managingEditor")?.content,
-            pubDate: try xmlNode.childNode(name: "pubDate").map(\.content).map(parseRssDate(_:)),
+            pubDate: try xmlNode.childNode(name: "pubDate").map({ try parseRssDate($0.content, path: $0.path) }),
             skipDays: try xmlNode.childNode(name: "skipDays").map(SkipDays.init(xmlNode:)) ?? [],
             skipHours: try xmlNode.childNode(name: "skipHours").map(SkipHours.init(xmlNode:)) ?? SkipHours(hours: []),
             ttl: xmlNode.childNode(name: "ttl").flatMap({ Int($0.content) }),

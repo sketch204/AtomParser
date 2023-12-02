@@ -15,7 +15,7 @@ public struct FeedParser {
             return try RSS(xmlNode: tree)
             
         default:
-            throw UnrecognizedFeedFormat()
+            throw UnrecognizedFeedFormat(rootNodeName: tree.name)
         }
     }
 }

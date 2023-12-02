@@ -1,3 +1,4 @@
+import AtomXML
 import Foundation
 
 
@@ -5,9 +6,9 @@ import Foundation
 
 let dateFormatter = ISO8601DateFormatter()
     
-func parseAtomDate(_ dateString: String) throws -> Date {
+func parseAtomDate(_ dateString: String, path: AtomXMLPath) throws -> Date {
     guard let date = dateFormatter.date(from: dateString) else {
-        throw UnsupportedDateFormat()
+        throw UnsupportedDateFormat(dateString: dateString, path: path)
     }
     return date
 }
@@ -34,7 +35,7 @@ private let formatters = [
     createDateFormatter("d MMM yyyy HH:mm"),
 ]
 
-func parseRssDate(_ string: String) throws -> Date {
+func parseRssDate(_ string: String, path: AtomXMLPath? = nil) throws -> Date {
     var output: Date?
     let uppercasedString = string.uppercased()
     
@@ -44,7 +45,7 @@ func parseRssDate(_ string: String) throws -> Date {
     }
     
     guard let output else {
-        throw UnsupportedDateFormat()
+        throw UnsupportedDateFormat(dateString: string, path: path)
     }
     
     return output

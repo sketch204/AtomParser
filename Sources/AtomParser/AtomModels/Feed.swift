@@ -25,19 +25,22 @@ extension Feed {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("feed")
         
-        guard let idNode = xmlNode.childNode(name: "id"),
-              let titleNode = xmlNode.childNode(name: "title"),
-              let updatedNode = xmlNode.childNode(name: "updated")
-        else {
-            throw MissingRequiredFields()
+        guard let idNode = xmlNode.childNode(name: "id") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "id"))
+        }
+        guard let titleNode = xmlNode.childNode(name: "title") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "title"))
+        }
+        guard let updatedNode = xmlNode.childNode(name: "updated") else {
+            throw MissingRequiredFields(path: xmlNode.path.appending(componentName: "updated"))
         }
         
         guard let uri = URL(string: idNode.content) else {
-            throw CorruptedData()
+            throw InvalidURL(urlString: idNode.content, path: idNode.path)
         }
         
         let title = try Text(xmlNode: titleNode)
-        let updated = try parseAtomDate(updatedNode.content)
+        let updated = try parseAtomDate(updatedNode.content, path: updatedNode.path)
         
         let entries = try xmlNode.childNodes(name: "entry")
             .map(Entry.init(xmlNode:))

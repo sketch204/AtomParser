@@ -29,8 +29,16 @@ extension Link {
     init(xmlNode: AtomXMLNode) throws {
         try xmlNode.checkName("link")
         
-        guard let url = xmlNode.attributes["href"].flatMap(URL.init(string:)) else {
-            throw MissingRequiredFields()
+        guard let urlString = xmlNode.attributes["href"] else {
+            throw MissingRequiredFields(
+                path: xmlNode.path.replacingLastComponentAttribute(with: "href")
+            )
+        }
+        guard let url = URL(string: urlString) else {
+            throw InvalidURL(
+                urlString: urlString,
+                path: xmlNode.path.replacingLastComponentAttribute(with: "href")
+            )
         }
         
         self.init(
