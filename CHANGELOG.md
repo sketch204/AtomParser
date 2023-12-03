@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.1.3] - 2023-12-02
+
+### Added
+
+- Errors now have debug and user-facing descriptions.
+
 ## [1.1.2] - 2023-12-01
 
 ### Added
